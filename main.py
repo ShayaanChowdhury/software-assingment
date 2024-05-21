@@ -100,6 +100,5 @@ def open_formula_window():
     Label16.place(x=770, y=180)
 
     formula_window.mainloop()
-
   
 open_main_window()
