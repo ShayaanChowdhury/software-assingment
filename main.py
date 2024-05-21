@@ -18,12 +18,15 @@ def open_main_window():
     button1 = tk.Button(root, text="Formula Sheet", height=3, width=15, bg='gray20', fg='white', relief="raised", command=open_formula_sheet)
     button1.place(x=455, y=210)
 
- #   def button_click2():
-  #      Label3 = tk.Label(root,)
-  #      Label3.pack()
+    def button_click2():
+        Label3 = tk.Label(root,)
+        Label3.pack()
 
-   # button2 = tk.Button(root, text="Start Quiz", height=3, width=15, bg='gray20', fg='white', relief="raised", command=button_click2)
-   # button2.place(x=455, y=310)
+    button2 = tk.Button(root, text="Start Quiz", height=3, width=15, bg='gray20', fg='white', relief="raised", command=button_click2)
+    button2.place(x=455, y=310)
+
+    button3 = tk.Button(root, text="Exit", height=3, width=15, bg='gray20', fg='white', relief="raised", command=root.destroy)
+    button3.place(x=455, y=410)
 
     img_1 = ImageTk.PhotoImage(Image.open("img1.png").resize((195, 195)))
     Label4 = tk.Label(root, image=img_1, bg='navajo white')
@@ -73,8 +76,8 @@ def open_formula_window():
         formula_window.destroy()
         open_main_window()
 
-    button3 = tk.Button(formula_window, text="Back to Home", height=3, width=15, bg='gray20', fg='white', relief="raised", command=back_to_home)
-    button3.place(x=850, y=450)
+    button4 = tk.Button(formula_window, text="Back to Home", height=3, width=15, bg='gray20', fg='white', relief="raised", command=back_to_home)
+    button4.place(x=850, y=450)
 
     img_5 = ImageTk.PhotoImage(Image.open("Triangle.png").resize((250, 250)))
     Label13 = tk.Label(formula_window, image=img_5, bg='navajo white')
@@ -98,4 +101,5 @@ def open_formula_window():
 
     formula_window.mainloop()
 
+  
 open_main_window()
