@@ -53,4 +53,7 @@ img_8 = ImageTk.PhotoImage(Image.open("Square.png").resize((230,230)))
 Label16= tk.Label(root, image=img_8, bg= 'navajo white')
 Label16.place(x=770,y=210)
 
+
+
+
 root.mainloop()
