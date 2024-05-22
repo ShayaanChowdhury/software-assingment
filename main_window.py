@@ -25,7 +25,10 @@ def open_main_window():
 
     button2 = tk.Button(root, text="Start Quiz", height=3, width=15, bg='gray20', fg='white', relief="raised", command=button_click2)
     button2.place(x=455, y=310)
-
+    
+    button3 = tk.Button(root, text="Exit", height=3, width=15, bg='gray20', fg='white', relief="raised", command=root.destroy)
+    button3.place(x=455, y=410)
+    
     img_1 = ImageTk.PhotoImage(Image.open("img1.png").resize((195, 195)))
     Label4 = tk.Label(root, image=img_1, bg='navajo white')
     Label4.place(x=20, y=195)
