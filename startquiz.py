@@ -39,11 +39,13 @@ def load_question(question_data):
     if options:
         for i, option in enumerate(options):
             tk.Radiobutton(root, text=option, font=('Comic Sans Ms', 15), value=i+1, variable=r, bg='navajo white').place(x=60, y=200 + i*50)
+        if "answer_entry" in globals():
+            answer_entry.destroy()
     else:
-        # Clear previous options
-        for widget in root.winfo_children():
-            if isinstance(widget, tk.Radiobutton):
-                widget.destroy()
+        if "answer_entry" in globals():
+            answer_entry.destroy()
+        answer_entry = tk.Entry(root, font=("Comic Sans MS", 15), width=30)
+        answer_entry.place(x=50, y=200)
 
 current_question_index = 0
 r = tk.IntVar()
@@ -58,5 +60,16 @@ label_img_5.place(x=300, y=0)
 img_6 = ImageTk.PhotoImage(Image.open("Star.png").resize((100, 100)))
 label_img_6 = tk.Label(root, image=img_6, bg='navajo white')
 label_img_6.place(x=600, y=0)
+
+def next_question():
+    global current_question_index
+    current_question_index += 1
+    if current_question_index < len(Questions):
+        load_question(Questions[current_question_index])
+    else:
+
+        pass
+
+button_next.config(command=next_question)
 
 root.mainloop()
