@@ -33,6 +33,14 @@ button_next.place(x=50, y=460)
 button_exit = tk.Button(root, text="Exit", height=3, width=15, bg='gray20', fg='white', relief="raised", command=root.destroy)
 button_exit.place(x=215, y=460)
 
+img_5 = ImageTk.PhotoImage(Image.open("Star.png").resize((100, 100)))
+Label21 = tk.Label(root, image=img_5, bg='navajo white')
+Label21.place(x=300, y=0)
+
+img_6 = ImageTk.PhotoImage(Image.open("Star.png").resize((100, 100)))
+Label21 = tk.Label(root, image=img_6, bg='navajo white')
+Label21.place(x=600, y=0)
+
 def load_question(question_data):
     label_question.config(text=question_data["Question"])
     options = question_data["options"]
@@ -52,24 +60,5 @@ r = tk.IntVar()
 label_question = tk.Label(root, text="", font=("Comic Sans MS", 17), bg='navajo white', padx=20, pady=10, borderwidth=2)
 label_question.place(x=50, y=125)
 load_question(Questions[current_question_index])
-
-img_5 = ImageTk.PhotoImage(Image.open("Star.png").resize((100, 100)))
-label_img_5 = tk.Label(root, image=img_5, bg='navajo white')
-label_img_5.place(x=300, y=0)
-
-img_6 = ImageTk.PhotoImage(Image.open("Star.png").resize((100, 100)))
-label_img_6 = tk.Label(root, image=img_6, bg='navajo white')
-label_img_6.place(x=600, y=0)
-
-def next_question():
-    global current_question_index
-    current_question_index += 1
-    if current_question_index < len(Questions):
-        load_question(Questions[current_question_index])
-    else:
-
-        pass
-
-button_next.config(command=next_question)
 
 root.mainloop()
