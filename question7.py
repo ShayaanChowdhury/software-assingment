@@ -15,7 +15,7 @@ button5.place(x=50, y=460)
 button3 = tk.Button(root, text="Exit", height=3, width=15, bg='gray20', fg='white', relief="raised", command=root.destroy)
 button3.place(x=215, y=460)
 
-Label43 = tk.Label(root, text = "Question 7: What is the base of a triangle with an area of 20 and base of 5?", font=("Comic Sans MS", 17), bg='navajo white',padx=20, pady=10, borderwidth=2)
+Label43 = tk.Label(root, text = "Question 7: What is the base of a triangle with an area of 20 and height of 5?", font=("Comic Sans MS", 17), bg='navajo white',padx=20, pady=10, borderwidth=2)
 Label43.place(x=50, y=125)
 
 Label44 = tk.Label(root, text = "Enter Your Answer Below", font=("Comic Sans MS", 10), bg='navajo white',padx=20, pady=10, borderwidth=2)
