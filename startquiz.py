@@ -104,7 +104,6 @@ def show_final_score():
 
     button_exit = tk.Button(final_screen, text="Exit", height=3, width=15, bg='gray20', fg='white', relief="raised", command=root.destroy)
     button_exit.pack(pady=20)
-
     root.withdraw()
 
 def next_question():
