@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from PIL import Image, ImageTk
 
 Questions = [
@@ -40,13 +41,14 @@ Label21.place(x=300, y=0)
 img_6 = ImageTk.PhotoImage(Image.open("Star.png").resize((100, 100)))
 Label21 = tk.Label(root, image=img_6, bg='navajo white')
 Label21.place(x=600, y=0)
-
+# UNDERSTAND 
 def load_question(question_data):
+    global answer_entry
     label_question.config(text=question_data["Question"])
     options = question_data["options"]
     if options:
         for i, option in enumerate(options):
-            tk.Radiobutton(root, text=option, font=('Comic Sans Ms', 15), value=i+1, variable=r, bg='navajo white').place(x=60, y=200 + i*50)
+            tk.Radiobutton(root, text=option, font=('Comic Sans Ms', 15), value=option, variable=r, bg='navajo white').place(x=60, y=200 + i*50)
         if "answer_entry" in globals():
             answer_entry.destroy()
     else:
@@ -56,9 +58,57 @@ def load_question(question_data):
         answer_entry.place(x=50, y=200)
 
 current_question_index = 0
-r = tk.IntVar()
+r = tk.StringVar()
 label_question = tk.Label(root, text="", font=("Comic Sans MS", 17), bg='navajo white', padx=20, pady=10, borderwidth=2)
 label_question.place(x=50, y=125)
 load_question(Questions[current_question_index])
+
+correct_answers = 0
+
+def show_final_score():
+    final_screen = tk.Toplevel(root)
+    final_screen.title("Quiz Results")
+    final_screen.geometry("500x300")
+    final_screen.configure(background='navajo white')
+
+    score_label = tk.Label(final_screen, text=f"Your score is {correct_answers}/{len(Questions)}", font=("Comic Sans MS", 20), bg='navajo white')
+    score_label.pack(pady=20)
+
+    percentage = (correct_answers / len(Questions)) * 100
+    percentage_label = tk.Label(final_screen, text=f"Percentage: {percentage:.2f}%", font=("Comic Sans MS", 20), bg='navajo white')
+    percentage_label.pack(pady=10)
+
+    star_img = ImageTk.PhotoImage(Image.open("Star.png").resize((100, 100)))
+    star_label = tk.Label(final_screen, image=star_img, bg='navajo white')
+    star_label.image = star_img
+    star_label.pack(pady=10)
+
+    def return_home():
+        final_screen.destroy()
+        root.deiconify()
+
+    button_return_home = tk.Button(final_screen, text="Return Home", height=3, width=15, bg='gray20', fg='white', relief="raised", command=return_home)
+    button_return_home.pack(pady=20)
+
+    root.withdraw()
+
+def next_question():
+    global current_question_index, correct_answers, answer_entry
+    selected_answer = r.get() if Questions[current_question_index]["options"] else answer_entry.get().strip()
+    correct_answer = Questions[current_question_index]["answer"]
+    
+    if selected_answer == correct_answer:
+        messagebox.showinfo("Result", "Correct!")
+        correct_answers += 1
+    else:
+        messagebox.showinfo("Result", f"Incorrect! The correct answer is {correct_answer}.")
+    
+    current_question_index += 1
+    if current_question_index < len(Questions):
+        load_question(Questions[current_question_index])
+    else:
+        show_final_score()
+
+button_next.config(command=next_question)
 
 root.mainloop()
