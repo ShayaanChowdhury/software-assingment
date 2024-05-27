@@ -49,30 +49,29 @@ def load_question(question_data):
     global answer_entry, question_image_label
     label_question.config(text=question_data["Question"])
     options = question_data["options"]
+    destroy_previous_question_widgets()
     
     if options:
         for i, option in enumerate(options):
             tk.Radiobutton(root, text=option, font=('Comic Sans Ms', 15), value=option, variable=r, bg='navajo white').place(x=60, y=200 + i*50)
-        if answer_entry is not None:
-            answer_entry.destroy()
-            answer_entry = None
     else:
-        if answer_entry is not None:
-            answer_entry.destroy()
         answer_entry = tk.Entry(root, font=("Comic Sans MS", 15), width=30)
         answer_entry.place(x=50, y=200)
 
     if "image" in question_data:
-        if question_image_label is not None:
-            question_image_label.destroy()
-        question_image = ImageTk.PhotoImage(Image.open(question_data["image"]).resize((400, 400)))
-        question_image_label = tk.Label(root, image=question_image, bg='navajo white').place(x=650, y=130)
+        question_image = ImageTk.PhotoImage(Image.open(question_data["image"]).resize((350, 350)))
+        question_image_label = tk.Label(root, image=question_image, bg='navajo white')
         question_image_label.image = question_image
-        question_image_label.place(x=500, y=150)
-    else:
-        if question_image_label is not None:
-            question_image_label.destroy()
-            question_image_label = None
+        question_image_label.place(x=650, y=130)
+
+def destroy_previous_question_widgets():
+    global answer_entry, question_image_label
+    if answer_entry:
+        answer_entry.destroy()
+        answer_entry = None
+    if question_image_label:
+        question_image_label.destroy()
+        question_image_label = None
 
 current_question_index = 0
 r = tk.StringVar()
@@ -110,7 +109,7 @@ def show_final_score():
     root.withdraw()
 
 def next_question():
-    global current_question_index, correct_answers, answer_entry
+    global current_question_index, correct_answers
     selected_answer = r.get() if Questions[current_question_index]["options"] else answer_entry.get().strip()
     correct_answer = Questions[current_question_index]["answer"]
     
