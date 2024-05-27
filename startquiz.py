@@ -14,10 +14,10 @@ Questions = [
     {"Question": "Question 9: What is the area of the circle shown?", "options": ["36π", "20π", "49π", "25π"], "answer": "49π", "image": "img10.png"},
     {"Question": "Question 10: What is the area of the circle with diameter of 32?", "options": ["572π", "542π", "256π", "1024π"], "answer": "256π"},
     {"Question": "Question 11: What is the radius of a circle with an area of 2401π?", "options": ["49π", "98π", "65π", "1200π"], "answer": "49π"},
-    {"Question": "Question 12 CHALLANGE: What is the area of the following composite shape?", "options": None, "answer": "57", "image": "img10.png"},
-    {"Question": "Question 13 CHALLANGE: What is the area of the following composite shape?", "options": None, "answer": "96", "image": "img11.png"},
-    {"Question": "Question 14 CHALLANGE: What is the shaded area of the following shape?", "options": None, "answer": "54", "image": "img12.png"},
-    {"Question": "Question 15 CHALLANGE: What is the area of the arrow?", "options": None, "answer": "57", "image": "img13.png"},
+    {"Question": "Question 12 CHALLANGE: What is the area of the following composite shape?", "options": None, "answer": "57", "image": "img11.png"},
+    {"Question": "Question 13 CHALLANGE: What is the area of the following composite shape?", "options": None, "answer": "96", "image": "img12.png"},
+    {"Question": "Question 14 CHALLANGE: What is the shaded area of the following shape?", "options": None, "answer": "54", "image": "img13.png"},
+    {"Question": "Question 15 CHALLANGE: What is the area of the arrow?", "options": None, "answer": "57", "image": "img14.png"},
 ]
 
 root = tk.Tk()
@@ -57,12 +57,12 @@ def load_question(question_data):
     else:
         answer_entry = tk.Entry(root, font=("Comic Sans MS", 15), width=30)
         answer_entry.place(x=50, y=200)
-
+    
     if "image" in question_data:
         question_image = ImageTk.PhotoImage(Image.open(question_data["image"]).resize((350, 350)))
         question_image_label = tk.Label(root, image=question_image, bg='navajo white')
         question_image_label.image = question_image
-        question_image_label.place(x=650, y=130)
+        question_image_label.place(x=650, y=175)
 
 def destroy_previous_question_widgets():
     global answer_entry, question_image_label
@@ -84,7 +84,7 @@ correct_answers = 0
 def show_final_score():
     final_screen = tk.Toplevel(root)
     final_screen.title("Quiz Results")
-    final_screen.geometry("500x300")
+    final_screen.geometry("500x550")
     final_screen.configure(background='navajo white')
 
     score_label = tk.Label(final_screen, text=f"Your score is {correct_answers}/{len(Questions)}", font=("Comic Sans MS", 20), bg='navajo white')
@@ -94,17 +94,16 @@ def show_final_score():
     percentage_label = tk.Label(final_screen, text=f"Percentage: {percentage:.2f}%", font=("Comic Sans MS", 20), bg='navajo white')
     percentage_label.pack(pady=10)
 
-    star_img = ImageTk.PhotoImage(Image.open("Star.png").resize((100, 100)))
+    star_img = ImageTk.PhotoImage(Image.open("Star.png").resize((150, 150)))
     star_label = tk.Label(final_screen, image=star_img, bg='navajo white')
     star_label.image = star_img
     star_label.pack(pady=10)
 
-    def return_home():
-        final_screen.destroy()
-        root.deiconify()
-
-    button_return_home = tk.Button(final_screen, text="Return Home", height=3, width=15, bg='gray20', fg='white', relief="raised", command=return_home)
+    button_return_home = tk.Button(final_screen, text="Return Home", height=3, width=15, bg='gray20', fg='white', relief="raised")
     button_return_home.pack(pady=20)
+
+    button_exit = tk.Button(final_screen, text="Exit", height=3, width=15, bg='gray20', fg='white', relief="raised", command=root.destroy)
+    button_exit.pack(pady=20)
 
     root.withdraw()
 
@@ -126,5 +125,4 @@ def next_question():
         show_final_score()
 
 button_next.config(command=next_question)
-
 root.mainloop()
