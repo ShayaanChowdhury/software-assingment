@@ -44,16 +44,20 @@ Label21.place(x=600, y=0)
 
 answer_entry = None
 question_image_label = None
+option_buttons = []
 
 def load_question(question_data):
-    global answer_entry, question_image_label
+    global answer_entry, question_image_label, option_buttons
     label_question.config(text=question_data["Question"])
     options = question_data["options"]
     destroy_previous_question_widgets()
     
     if options:
+        option_buttons = []
         for i, option in enumerate(options):
-            tk.Radiobutton(root, text=option, font=('Comic Sans Ms', 15), value=option, variable=r, bg='navajo white').place(x=60, y=200 + i*50)
+            btn = tk.Radiobutton(root, text=option, font=('Comic Sans Ms', 15), value=option, variable=r, bg='navajo white')
+            btn.place(x=60, y=200 + i*50)
+            option_buttons.append(btn)
     else:
         answer_entry = tk.Entry(root, font=("Comic Sans MS", 15), width=30)
         answer_entry.place(x=50, y=200)
@@ -65,14 +69,18 @@ def load_question(question_data):
         question_image_label.place(x=650, y=175)
 
 def destroy_previous_question_widgets():
-    global answer_entry, question_image_label
+    global answer_entry, question_image_label, option_buttons, r
     if answer_entry:
         answer_entry.destroy()
         answer_entry = None
     if question_image_label:
         question_image_label.destroy()
         question_image_label = None
-   
+    for btn in option_buttons:
+        btn.destroy()
+    option_buttons = []
+    r.set(None)
+
 current_question_index = 0
 r = tk.StringVar()
 label_question = tk.Label(root, text="", font=("Comic Sans MS", 17), bg='navajo white', padx=20, pady=10, borderwidth=2)
@@ -108,7 +116,7 @@ def show_final_score():
         star_label.pack(pady=10)
 
     button_backhome = tk.Button(final_screen, text="Back Home", height=3, width=15, bg='gray20', fg='white', relief="raised")
-    button_backhome.place(x= 10, y = 475)
+    button_backhome.place(x=10, y=475)
 
     button_exit = tk.Button(final_screen, text="Exit", height=3, width=15, bg='gray20', fg='white', relief="raised", command=root.destroy)
     button_exit.place(x=350, y=475)
