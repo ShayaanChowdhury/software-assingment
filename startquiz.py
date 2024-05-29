@@ -73,13 +73,11 @@ def destroy_previous_question_widgets():
         question_image_label.destroy()
         question_image_label = None
    
-
 current_question_index = 0
 r = tk.StringVar()
 label_question = tk.Label(root, text="", font=("Comic Sans MS", 17), bg='navajo white', padx=20, pady=10, borderwidth=2)
 label_question.place(x=50, y=125)
 load_question(Questions[current_question_index])
-
 correct_answers = 0
 
 def show_final_score():
@@ -95,16 +93,25 @@ def show_final_score():
     percentage_label = tk.Label(final_screen, text=f"Percentage: {percentage:.2f}%", font=("Comic Sans MS", 20), bg='navajo white')
     percentage_label.pack(pady=10)
 
-    star_img = ImageTk.PhotoImage(Image.open("Star.png").resize((150, 150)))
-    star_label = tk.Label(final_screen, image=star_img, bg='navajo white')
-    star_label.image = star_img
-    star_label.pack(pady=10)
+    star_count = 0
+    if correct_answers >= 13:
+        star_count = 3
+    elif correct_answers >= 8:
+        star_count = 2
+    elif correct_answers >= 0:
+        star_count = 0
+
+    star_img = ImageTk.PhotoImage(Image.open("Star.png").resize((75, 75)))
+    for _ in range(star_count):
+        star_label = tk.Label(final_screen, image=star_img, bg='navajo white')
+        star_label.image = star_img
+        star_label.pack(pady=10)
 
     button_backhome = tk.Button(final_screen, text="Back Home", height=3, width=15, bg='gray20', fg='white', relief="raised")
-    button_backhome.pack(pady=20)
+    button_backhome.place(x= 10, y = 475)
 
     button_exit = tk.Button(final_screen, text="Exit", height=3, width=15, bg='gray20', fg='white', relief="raised", command=root.destroy)
-    button_exit.pack(pady=20)
+    button_exit.place(x=350, y=475)
 
     root.withdraw()
 
