@@ -29,10 +29,10 @@ label_quiz = tk.Label(root, text="Quiz", font=("Impact", 45), bg='navajo white',
 label_quiz.place(x=430, y=0)
 
 button_next = tk.Button(root, text="Next Question", height=3, width=15, bg='gray20', fg='white', relief="raised")
-button_next.place(x=50, y=460)
+button_next.place(x=215, y=460)
 
 button_exit = tk.Button(root, text="Exit", height=3, width=15, bg='gray20', fg='white', relief="raised", command=root.destroy)
-button_exit.place(x=215, y=460)
+button_exit.place(x=50, y=460)
 
 img_5 = ImageTk.PhotoImage(Image.open("Star.png").resize((100, 100)))
 Label21 = tk.Label(root, image=img_5, bg='navajo white')
@@ -72,6 +72,7 @@ def destroy_previous_question_widgets():
     if question_image_label:
         question_image_label.destroy()
         question_image_label = None
+   
 
 current_question_index = 0
 r = tk.StringVar()
@@ -99,11 +100,12 @@ def show_final_score():
     star_label.image = star_img
     star_label.pack(pady=10)
 
-    button_return_home = tk.Button(final_screen, text="Return Home", height=3, width=15, bg='gray20', fg='white', relief="raised")
-    button_return_home.pack(pady=20)
+    button_backhome = tk.Button(final_screen, text="Back Home", height=3, width=15, bg='gray20', fg='white', relief="raised")
+    button_backhome.pack(pady=20)
 
     button_exit = tk.Button(final_screen, text="Exit", height=3, width=15, bg='gray20', fg='white', relief="raised", command=root.destroy)
     button_exit.pack(pady=20)
+
     root.withdraw()
 
 def next_question():
